@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import  ProductList from './pages/ProductList'
+import  ProductList from './pages/Products'
 
 
 function App() {
