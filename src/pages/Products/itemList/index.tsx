@@ -1,11 +1,15 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 import { Grid } from "@mui/material";
 import { motion } from "framer-motion";
 import { ItemsListStyles, ItemStyles } from "./style";
+import noPicture from "../../../assets/pictures/no-img-layout.png";
 
 const Item: FC<any> = ({ item }) => {
   const classes = ItemStyles();
+
+  // console.log(2,noPicture);
+  const [image, setImage] = useState<string>(item.image_link);
 
   return (
     <Grid item xs={12} sm={6} md={3}>
@@ -16,7 +20,7 @@ const Item: FC<any> = ({ item }) => {
         transition={{ duration: 1 }}
       >
         <p>{item.title}</p>
-        <img src={item.image_link} alt="image" className={classes.img} />
+        <img src={image} alt="image" className={classes.img} onError={()=>setImage(noPicture)} />
         <p>{`Price: ${item.price}`}</p>
         <p>{`Price2: ${item.sale_price}`}</p>
       </motion.div>
