@@ -35,16 +35,16 @@ interface IProps {
 const ItemList: FC<IProps> = ({ items }) => {
   const classes = ItemsListStyles();
 
-  let searchTerm: string = "Slip black";
+  // let searchTerm: string = "Slip black";
 
   const list: JSX.Element[] = items
-    .filter((item: any) => {
-      if (searchTerm === "") {
-        return item;
-      } else if (item.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-        return item;
-      }
-    })
+    // .filter((item: any) => {
+    //   if (searchTerm === "") {
+    //     return item;
+    //   } else if (item.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+    //     return item;
+    //   }
+    // })
     .map((item: any) => <Item key={item.gtin} item={item} />);
 
   return (
