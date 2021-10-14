@@ -3,7 +3,8 @@ import React, { FC, useState, useEffect } from "react";
 import { Box } from "@mui/material";
 
 import ItemList from "./itemList";
-import BasicPagination from "../../components/BasicPagination"; // change a name to Pagination
+import BasicPagination from "../../components/Pagination"; // change a name to Pagination
+import BasicAutocomplete from "../../components/Autocomlite" // change a name to Autocomlite
 
 import { DSVRowArray } from "d3-dsv";
 import csvConverter from "../../utilities/csvConverter";
@@ -19,7 +20,7 @@ const ProductList: FC = () => {
     );
   }, []);
 
-  let searchTerm: string = "Zalando";
+  let searchTerm: string = "";
 
   const list: any[] = items.filter((item: any) => {
     if (searchTerm === "") {
@@ -28,6 +29,9 @@ const ProductList: FC = () => {
       return item;
     }
   });
+
+  console.log(1,list );
+  
 
   const limit:number = 10 // default should be 100
   const totalPages: number = Math.round(list.length / limit); 
@@ -39,6 +43,7 @@ const ProductList: FC = () => {
       maxWidth={"1480px"}
       sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
     >
+      <BasicAutocomplete data={list} />
       <ItemList items={currList} />
       <BasicPagination
         totalPages={totalPages}
