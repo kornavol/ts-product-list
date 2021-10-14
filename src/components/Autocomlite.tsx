@@ -12,6 +12,8 @@ import Typography from "@mui/material/Typography";
 
 interface IProps {
   data: any[];
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const LISTBOX_PADDING = 8; // px
@@ -125,11 +127,11 @@ const StyledPopper = styled(Popper)({
   },
 });
 
-const BasicAutocomplete: FC<IProps> = ({ data }) => {
-  const [value, setValue] = useState<string>("");
+const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
   const [inputValue, setInputValue] = useState<string>("");
 
-  console.log("value: ", value);
+  console.log("searchTerm: ", searchTerm);
+  console.log("inputValue: ", inputValue);
 
   return (
     <Stack spacing={2} sx={{ width: 300 }}>
@@ -147,16 +149,26 @@ const BasicAutocomplete: FC<IProps> = ({ data }) => {
         )}
         renderOption={(props, option) => [props, option]}
         renderGroup={(params) => params}
-        value={value}
+        value={searchTerm}
         inputValue={inputValue}
-        onInputChange={(event: React.SyntheticEvent, value: string) =>
-          setInputValue(value)
-        }
-        onChange={(event: React.SyntheticEvent, newValue: string | null) => {
-          if (newValue) {
-            setValue(newValue);
+        onInputChange={(event:any, value: string) => {
+        //   console.log(3, event.code);
+        //   console.log('OnIN', value);
+
+          if (event?.code === "Enter") {
+            setSearchTerm(inputValue);
           } else {
-            setValue(inputValue);
+            setInputValue(value);
+          }
+        }}
+        onChange={(event: React.SyntheticEvent, newValue: string | null) => {
+        //   console.log(4, event);
+        //   console.log("newValue", newValue);
+
+          if (newValue) {
+            setSearchTerm(newValue);
+          } else {
+            setSearchTerm(inputValue);
           }
         }}
       />

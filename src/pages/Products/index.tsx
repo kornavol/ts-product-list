@@ -4,23 +4,22 @@ import { Box } from "@mui/material";
 
 import ItemList from "./itemList";
 import BasicPagination from "../../components/Pagination"; // change a name to Pagination
-import BasicAutocomplete from "../../components/Autocomlite" // change a name to Autocomlite
+import BasicAutocomplete from "../../components/Autocomlite"; // change a name to Autocomlite
 
 import { DSVRowArray } from "d3-dsv";
 import csvConverter from "../../utilities/csvConverter";
-import pagePaginator from '../../utilities/pagePaginator'
+import pagePaginator from "../../utilities/pagePaginator";
 
 const ProductList: FC = () => {
   const [items, setitems] = useState<any[]>([]);
   const [activePage, setActivePage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     csvConverter("products").then((data: DSVRowArray<string>) =>
       setitems(data)
     );
   }, []);
-
-  let searchTerm: string = "";
 
   const list: any[] = items.filter((item: any) => {
     if (searchTerm === "") {
@@ -30,26 +29,31 @@ const ProductList: FC = () => {
     }
   });
 
-  console.log(1,list );
-  
+  const limit: number = 10; // default should be 100
+  const totalPages: number = Math.round(list.length / limit);
 
-  const limit:number = 10 // default should be 100
-  const totalPages: number = Math.round(list.length / limit); 
+  const currList = pagePaginator(limit, activePage, list);
 
-  const currList = pagePaginator(limit, activePage, list)
-  
   return (
     <Box
       maxWidth={"1480px"}
       sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
     >
-      <BasicAutocomplete data={list} />
-      <ItemList items={currList} />
-      <BasicPagination
-        totalPages={totalPages}
-        activePage={activePage}
-        setActivePage={setActivePage}
+      <BasicAutocomplete
+        data={list}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       />
+      {searchTerm && 
+      <>
+        <ItemList items={currList} />
+        <BasicPagination
+          totalPages={totalPages}
+          activePage={activePage}
+          setActivePage={setActivePage}
+        />
+      </>
+    }
     </Box>
   );
 };

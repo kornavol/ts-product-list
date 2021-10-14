@@ -7,8 +7,6 @@ import noPicture from "../../../assets/pictures/no-img-layout.png";
 
 const Item: FC<any> = ({ item }) => {
   const classes = ItemStyles();
-
-  // console.log(2,noPicture);
   const [image, setImage] = useState<string>(item.image_link);
 
   return (
@@ -20,7 +18,12 @@ const Item: FC<any> = ({ item }) => {
         transition={{ duration: 1 }}
       >
         <p>{item.title}</p>
-        <img src={image} alt="image" className={classes.img} onError={()=>setImage(noPicture)} />
+        <img
+          src={image}
+          alt="image"
+          className={classes.img}
+          onError={() => setImage(noPicture)}
+        />
         <p>{`Price: ${item.price}`}</p>
         <p>{`Price2: ${item.sale_price}`}</p>
       </motion.div>
@@ -35,17 +38,9 @@ interface IProps {
 const ItemList: FC<IProps> = ({ items }) => {
   const classes = ItemsListStyles();
 
-  // let searchTerm: string = "Slip black";
-
-  const list: JSX.Element[] = items
-    // .filter((item: any) => {
-    //   if (searchTerm === "") {
-    //     return item;
-    //   } else if (item.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-    //     return item;
-    //   }
-    // })
-    .map((item: any) => <Item key={item.gtin} item={item} />);
+  const list: JSX.Element[] = items.map((item: any) => (
+    <Item key={item.gtin} item={item} />
+  ));
 
   return (
     <Grid container spacing={1}>
