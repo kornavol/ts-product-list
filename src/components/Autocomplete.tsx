@@ -130,14 +130,14 @@ const StyledPopper = styled(Popper)({
 const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
   const [inputValue, setInputValue] = useState<string>("");
 
-  console.log("searchTerm: ", searchTerm);
-  console.log("inputValue: ", inputValue);
+//   console.log("searchTerm: ", searchTerm);
+//   console.log("inputValue: ", inputValue);
 
   return (
     <Stack spacing={2} sx={{ width: 300 }}>
       <Autocomplete
         freeSolo
-        id="virtualize-demo"
+        id="Autocomplete-search"
         sx={{ width: 300 }}
         disableListWrap
         PopperComponent={StyledPopper}
@@ -145,7 +145,7 @@ const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
         options={data.map((item) => item.title)}
         groupBy={(option) => option[0].toUpperCase()}
         renderInput={(params) => (
-          <TextField {...params} label="10,000 options" />
+          <TextField {...params} label="Search..." />
         )}
         renderOption={(props, option) => [props, option]}
         renderGroup={(params) => params}
