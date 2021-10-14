@@ -18,7 +18,7 @@ const ProductList: FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filter, setFilter] = React.useState<ProductFilter>({
     gender: "",
-    price: "",
+    onSale: false,
   });
 
   console.log(1, filter);
@@ -28,22 +28,6 @@ const ProductList: FC = () => {
       setitems(data)
     );
   }, []);
-
-  // const list: any[] = items
-  // .filter((item: any) => {
-  //   if (searchTerm === "") {
-  //     return item;
-  //   } else if (item.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-  //     return item;
-  //   }
-  // })
-  // .filter((item:any) => {
-  //   if (filter.gender === "") {
-  //     return item;
-  //   } else if (item.gender.includes(filter.gender)) {
-  //     return item;
-  //   }
-  // })
 
   let list: any[] = items.filter((item: any) => {
     if (searchTerm === "") {
@@ -56,6 +40,14 @@ const ProductList: FC = () => {
   if (filter.gender !== "") {
     list = list.filter((item: any) => {
       if (item.gender.includes(filter.gender)) {
+        return item;
+      }
+    });
+  }
+
+  if (filter.onSale) {
+    list = list.filter((item: any) => {
+      if (item?.sale_price < item?.price) {
         return item;
       }
     });
