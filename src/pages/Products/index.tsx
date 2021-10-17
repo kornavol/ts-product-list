@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router";
 
 import { Box } from "@mui/material";
 
@@ -13,6 +14,9 @@ import pagePaginator from "../../utilities/pagePaginator";
 import { ProductFilter } from "../../interfaces";
 
 const ProductList: FC = () => {
+  const history = useHistory();
+  const location: any = useLocation();
+
   const [items, setitems] = useState<any[]>([]);
   const [activePage, setActivePage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -21,23 +25,49 @@ const ProductList: FC = () => {
     onSale: false,
   });
 
-
   useEffect(() => {
     csvConverter("products").then((data: DSVRowArray<string>) =>
       setitems(data)
     );
 
-    const sessionSearchTerm: string | null =
-      sessionStorage.getItem("searchTerm");
-    if (sessionSearchTerm) {
-      setSearchTerm(sessionSearchTerm);
-    }
+    console.log(0, location);
 
-    const sessionFilter: string | null = sessionStorage.getItem("filter");
-    if (sessionFilter) {
-      const obj:ProductFilter = JSON.parse(sessionFilter)
-      setFilter(obj);
+    let sessionFilterParam: any = location.state;
+
+    console.log(1, location.state);
+    console.log(11, sessionFilterParam);
+
+    window.onpopstate = (e: any) => {
+      const sessionSearchTerm: string | null =
+        sessionStorage.getItem("searchTerm");
+      if (sessionSearchTerm) {
+        setSearchTerm(sessionSearchTerm);
+      }
+
+      const sessionFilter: string | null = sessionStorage.getItem("filter");
+      if (sessionFilter) {
+        const obj: ProductFilter = JSON.parse(sessionFilter);
+        setFilter(obj);
+      }
+    };
+
+    if (sessionFilterParam) {
+      if (sessionFilterParam?.searchTerm) {
+        setSearchTerm(sessionFilterParam.searchTerm);
+      }
+
+      if (
+        Object.keys(sessionFilterParam?.filter).length === 0 &&
+        sessionFilterParam?.filter.constructor === Object
+      ) {
+        setFilter(sessionFilterParam.filter);
+      }
+
+      history.replace("/", "");
     }
+    // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    //   console.info( "This page is reloaded" );
+    // }
   }, []);
 
   useEffect(() => {
