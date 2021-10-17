@@ -12,9 +12,6 @@ const Item: FC<any> = ({ item }) => {
 
   const classes = ItemStyles();
   const [image, setImage] = useState<string>(item.image_link);
-
-  console.log(item);
-
   const ImgClickHandler = () => {
     if (item.additional_image_link) {
       history.push(`/item/${item.gtin}`, item.additional_image_link);
@@ -36,6 +33,7 @@ const Item: FC<any> = ({ item }) => {
           className={classes.img}
           onError={() => setImage(noPicture)}
           onClick={ImgClickHandler}
+          // loading="lazy"
         />
         <p>{`Price: ${item.price}`}</p>
         <p>{`Price2: ${item.sale_price}`}</p>
@@ -44,27 +42,19 @@ const Item: FC<any> = ({ item }) => {
   );
 };
 
-// interface IProps {
-//   items: any[];
-// }
+interface IProps {
+  items: any[];
+}
 
-const ItemList: FC<any> = () => {
+const ItemList: FC<any> = ({items}) => {
   const classes = ItemsListStyles();
-  const items = JSON.parse(localStorage.getItem('currList') || '{}')
-
-  console.log(3,items);
-  
-
   const list: JSX.Element[] = items.map((item: any) => (
-    <Item
-      key={item.gtin}
-      item={item}
-    />
+    <Item key={item.gtin} item={item} />
   ));
 
   return (
     <Grid container spacing={1}>
-      {items.length > 0 ? list : <p>test1</p> }
+      {items.length > 0 ? list : <p>test1</p>}
     </Grid>
   );
 };
