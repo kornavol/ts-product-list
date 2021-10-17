@@ -3,7 +3,7 @@ import React, { FC, useState, useEffect } from "react";
 import { Box } from "@mui/material";
 
 import ItemList from "./itemList";
-import BasicPagination from "../../components/Pagination"; // change a name to Pagination
+import Pagination from "../../components/Pagination"; // change a name to Pagination
 import ProductBar from "../Products/ProductBar";
 
 import { DSVRowArray } from "d3-dsv";
@@ -21,6 +21,7 @@ const ProductList: FC = () => {
     onSale: false,
   });
 
+
   useEffect(() => {
     csvConverter("products").then((data: DSVRowArray<string>) =>
       setitems(data)
@@ -32,16 +33,17 @@ const ProductList: FC = () => {
       setSearchTerm(sessionSearchTerm);
     }
 
-    const sessionFilter: ProductFilter = JSON.parse(
-      sessionStorage.getItem("filter") || `{ gender: "", onSale: false}`
-    );
+    const sessionFilter: string | null = sessionStorage.getItem("filter");
     if (sessionFilter) {
-      setFilter(sessionFilter);
+      const obj:ProductFilter = JSON.parse(sessionFilter)
+      setFilter(obj);
     }
   }, []);
 
   useEffect(() => {
-    sessionStorage.setItem("searchTerm", searchTerm);
+    if (searchTerm) {
+      sessionStorage.setItem("searchTerm", searchTerm);
+    }
   }, [searchTerm]);
 
   useEffect(() => {
@@ -72,7 +74,7 @@ const ProductList: FC = () => {
     });
   }
 
-  const limit: number = 10; // default should be 100
+  const limit: number = 100;
   const totalPages: number = Math.round(list.length / limit);
 
   const currList = pagePaginator(limit, activePage, list);
@@ -91,7 +93,7 @@ const ProductList: FC = () => {
       {searchTerm && (
         <>
           <ItemList items={currList} />
-          <BasicPagination
+          <Pagination
             totalPages={totalPages}
             activePage={activePage}
             setActivePage={setActivePage}

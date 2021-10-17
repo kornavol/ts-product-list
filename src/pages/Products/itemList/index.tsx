@@ -33,7 +33,7 @@ const Item: FC<any> = ({ item }) => {
           className={classes.img}
           onError={() => setImage(noPicture)}
           onClick={ImgClickHandler}
-          // loading="lazy"
+          loading="lazy"
         />
         <p>{`Price: ${item.price}`}</p>
         <p>{`Price2: ${item.sale_price}`}</p>

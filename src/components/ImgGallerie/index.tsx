@@ -5,20 +5,21 @@ import { useLocation, useHistory } from "react-router";
 // import noPicture from "../../assets/pictures/no-img-layout.png";
 
 const ImgGallerie: FC<any> = () => {
-const history = useHistory()
+  const history = useHistory();
   const location: any = useLocation();
 
   const imagesArr: string[] = location.state.split(",");
 
   const images: JSX.Element[] = imagesArr.map((img: string) => (
-    <img src={img} alt="additinal picture" key={img} />
+    <img src={img} alt="additinal picture" key={img} loading="lazy" />
   ));
 
   return (
-  <div>
+    <div>
       {images}
-      <button onClick={()=>history.push('/')}>Back</button>
-    </div>)
+      <button onClick={() => history.push("/")}>Back</button>
+    </div>
+  );
 };
 
 export default ImgGallerie;
