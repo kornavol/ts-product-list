@@ -65,9 +65,6 @@ const ProductList: FC = () => {
 
       history.replace("/", "");
     }
-    // if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-    //   console.info( "This page is reloaded" );
-    // }
   }, []);
 
   useEffect(() => {
