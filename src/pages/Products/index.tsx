@@ -15,7 +15,7 @@ import { ProductFilter } from "../../interfaces";
 const ProductList: FC = () => {
   const [items, setitems] = useState<any[]>([]);
   const [activePage, setActivePage] = useState<number>(1);
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("Zalando");
   const [filter, setFilter] = React.useState<ProductFilter>({
     gender: "",
     onSale: false,
@@ -24,10 +24,33 @@ const ProductList: FC = () => {
   console.log(1, filter);
 
   useEffect(() => {
+    console.log('from USeEffect');
+    
     csvConverter("products").then((data: DSVRowArray<string>) =>
       setitems(data)
     );
+
+    const sessionSearchTerm:string | null  = sessionStorage.getItem('searchTerm')
+    if (sessionSearchTerm) {
+      setSearchTerm(sessionSearchTerm)
+    }
+
+    const sessionFilter:ProductFilter  = JSON.parse(sessionStorage.getItem('filter') || `{ gender: "", onSale: false}`)
+    if (sessionFilter) {
+      setFilter(sessionFilter)
+    }
+
+
+
   }, []);
+
+  useEffect(() => {
+      sessionStorage.setItem('searchTerm', searchTerm)
+  }, [searchTerm]);
+
+  useEffect(() => {
+    sessionStorage.setItem('filter', JSON.stringify(filter))
+}, [filter]);
 
   let list: any[] = items.filter((item: any) => {
     if (searchTerm === "") {
@@ -57,6 +80,8 @@ const ProductList: FC = () => {
   const totalPages: number = Math.round(list.length / limit);
 
   const currList = pagePaginator(limit, activePage, list);
+  
+  localStorage.setItem('currList', JSON.stringify(currList));
 
   console.log(list);
 
@@ -74,7 +99,9 @@ const ProductList: FC = () => {
       />
       {searchTerm && (
         <>
-          <ItemList items={currList} />
+          <ItemList 
+          // items={currList}
+           />
           <BasicPagination
             totalPages={totalPages}
             activePage={activePage}

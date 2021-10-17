@@ -8,7 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 
-import BasicAutocomplete from "../../../components/Autocomplete"; // change a name to Autocomlite
+import Autocomplete from "../../../components/Autocomplete";
 
 import { ProductFilter } from "../../../interfaces";
 
@@ -62,7 +62,7 @@ const ProductBar: FC<IProps> = (props) => {
         </FormControl>
       </FormGroup>
 
-      <BasicAutocomplete
+      <Autocomplete
         data={data}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

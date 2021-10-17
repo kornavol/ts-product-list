@@ -1,5 +1,4 @@
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { styled, alpha } from "@mui/material/styles";
 
 export const ItemsListStyles = makeStyles((theme: Theme) => ({
   root: {},
