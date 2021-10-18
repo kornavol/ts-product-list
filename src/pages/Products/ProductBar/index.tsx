@@ -33,6 +33,8 @@ const ProductBar: FC<IProps> = (props) => {
     setFilter((prev: ProductFilter) => ({ ...prev, onSale: value }));
   };
 
+  
+
   return (
     <Stack spacing={2} 
     // direction="row"

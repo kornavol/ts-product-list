@@ -10,6 +10,8 @@ import { useTheme, styled } from "@mui/material/styles";
 import { VariableSizeList, ListChildComponentProps } from "react-window";
 import Typography from "@mui/material/Typography";
 
+import { toArrwithUniqItems } from "../utilities/converters";
+
 interface IProps {
   data: any[];
   searchTerm: string;
@@ -132,6 +134,15 @@ const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
 
 //   console.log("searchTerm: ", searchTerm);
 //   console.log("inputValue: ", inputValue);
+  function groupBy(option:any) {
+    // console.log('option', option)
+    return option[0].toUpperCase()
+  } 
+
+
+
+  const products:any = toArrwithUniqItems(data)
+
 
   return (
     <Stack spacing={2} sx={{ width: 300 }}>
@@ -142,8 +153,9 @@ const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
         disableListWrap
         PopperComponent={StyledPopper}
         ListboxComponent={ListboxComponent}
-        options={data.map((item) => item.title)}
-        groupBy={(option) => option[0].toUpperCase()}
+        // options={optionConf(data)}
+        options={products.map((item:any) => item)}
+        groupBy={(option) => groupBy(option)}
         renderInput={(params) => (
           <TextField {...params} label="Search..." />
         )}

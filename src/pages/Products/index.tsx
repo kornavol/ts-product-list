@@ -37,6 +37,7 @@ const ProductList: FC = () => {
     console.log(1, location.state);
     console.log(11, sessionFilterParam);
 
+    /* Detect click on back button */
     window.onpopstate = (e: any) => {
       const sessionSearchTerm: string | null =
         sessionStorage.getItem("searchTerm");
