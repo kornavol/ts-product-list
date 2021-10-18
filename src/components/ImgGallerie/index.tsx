@@ -2,7 +2,7 @@ import { AnySrvRecord } from "dns";
 import React, { FC, useEffect } from "react";
 import { useLocation, useHistory } from "react-router";
 import { GallerieStyles } from "./style";
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import { Grid } from "@mui/material";
 
@@ -17,14 +17,14 @@ const ImgGallerie: FC<any> = () => {
   const imagesArr: string[] = location.state.split(",");
 
   const images: JSX.Element[] = imagesArr.map((img: string) => (
-    <Grid item xs={12}  lg={6}>
-    <img
-      className={classes.img}
-      src={img}
-      alt="additinal product picture"
-      key={img}
-      loading="lazy"
-    />
+    <Grid item xs={12} lg={6}>
+      <img
+        className={classes.img}
+        src={img}
+        alt="additinal product picture"
+        key={img}
+        loading="lazy"
+      />
     </Grid>
   ));
 
@@ -55,17 +55,15 @@ const ImgGallerie: FC<any> = () => {
   return (
     <>
       <div className={classes.root}>
-      <Grid container  
-      className={classes.grid}
-      >
-        {images}
-      </Grid>
-      <HighlightOffIcon
-      className={classes.close}
-      color="secondary"
-      sx={{fontSize:50}}
-      onClick={() => history.push("/", filterParam)}
-      />
+        <Grid container className={classes.grid}>
+          {images}
+        </Grid>
+        <HighlightOffIcon
+          className={classes.close}
+          color="secondary"
+          sx={{ fontSize: 50 }}
+          onClick={() => history.push("/", filterParam)}
+        />
       </div>
     </>
   );
