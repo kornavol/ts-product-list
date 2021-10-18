@@ -7,6 +7,8 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { FilterBarStyle } from "./style";
 
 import Autocomplete from "../../../components/Autocomplete";
 
@@ -21,6 +23,7 @@ interface IProps {
 }
 
 const ProductBar: FC<IProps> = (props) => {
+  const classes=FilterBarStyle()
   const { data, searchTerm, setSearchTerm, filter, setFilter } = props;
 
   const SelectHandleChange = (event: SelectChangeEvent) => {
@@ -33,21 +36,24 @@ const ProductBar: FC<IProps> = (props) => {
     setFilter((prev: ProductFilter) => ({ ...prev, onSale: value }));
   };
 
-  
-
   return (
-    <Stack spacing={2} 
-    // direction="row"
+    <Stack
+      spacing={2}
+      direction="row"
+      className={classes.stack}
     >
-      <FormGroup row={true}> 
-        <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Sale</InputLabel>
-          <Checkbox
-            checked={filter.onSale}
-            onChange={CheckboxHandleChange}
-            inputProps={{ "aria-label": "controlled" }}
-          />
-        </FormControl>
+      <div>
+        <Autocomplete
+          data={data}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
+      </div>
+{    searchTerm &&  
+      <FormGroup
+        row={true}
+        className={classes.formGroup}
+      >
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Gender</InputLabel>
           <Select
@@ -62,13 +68,19 @@ const ProductBar: FC<IProps> = (props) => {
             <MenuItem value={"unisex"}>unisex</MenuItem>
           </Select>
         </FormControl>
-      </FormGroup>
 
-      <Autocomplete
-        data={data}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-      />
+        <FormControlLabel
+          sx={{margin:'auto'}}
+          label="Sale"
+          control={
+            <Checkbox
+              checked={filter.onSale}
+              onChange={CheckboxHandleChange}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+          }
+        />
+      </FormGroup>}
     </Stack>
   );
 };

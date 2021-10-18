@@ -13,7 +13,9 @@ const Item: FC<any> = ({ item }) => {
   const classes = ItemStyles();
   const [image, setImage] = useState<string>(item.image_link);
   const ImgClickHandler = () => {
-    if (item.additional_image_link) {
+    if (item.additional_image_link &&  item.additional_image_link.length > 0 ) {
+      console.log(item.additional_image_link.length);
+      
       history.push(`/item/${item.gtin}`, item.additional_image_link);
     }
   };

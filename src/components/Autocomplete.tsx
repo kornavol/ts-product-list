@@ -132,20 +132,24 @@ const StyledPopper = styled(Popper)({
 const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
   const [inputValue, setInputValue] = useState<string>("");
 
-//   console.log("searchTerm: ", searchTerm);
-//   console.log("inputValue: ", inputValue);
-  function groupBy(option:any) {
-    // console.log('option', option)
-    return option[0].toUpperCase()
-  } 
+  //   console.log("searchTerm: ", searchTerm);
+  //   console.log("inputValue: ", inputValue);
+  function groupBy(option: string):string {
+    // console.log("option", option);
+    const firstLetter: string = option[0].toUpperCase();
+    const num = /[0-9]/.test(firstLetter);
+    if (num) {
+      return "0-9";
+    } else {
+      return firstLetter;
+    }
+  }
 
-
-
-  const products:any = toArrwithUniqItems(data)
-
+  /* remove doplicates and conver to array of strings */
+  const products: any = toArrwithUniqItems(data);
 
   return (
-    <Stack spacing={2} sx={{ width: 300 }}>
+    <Stack spacing={2} sx={{ width: 300, }}>
       <Autocomplete
         freeSolo
         id="Autocomplete-search"
@@ -154,18 +158,16 @@ const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
         PopperComponent={StyledPopper}
         ListboxComponent={ListboxComponent}
         // options={optionConf(data)}
-        options={products.map((item:any) => item)}
-        groupBy={(option) => groupBy(option)}
-        renderInput={(params) => (
-          <TextField {...params} label="Search..." />
-        )}
+        options={products.sort()}
+        groupBy={(option: string) => groupBy(option)}
+        renderInput={(params) => <TextField {...params} label="Search..." />}
         renderOption={(props, option) => [props, option]}
         renderGroup={(params) => params}
         value={searchTerm}
         inputValue={inputValue}
-        onInputChange={(event:any, value: string) => {
-        //   console.log(3, event.code);
-        //   console.log('OnIN', value);
+        onInputChange={(event: any, value: string) => {
+          //   console.log(3, event.code);
+          //   console.log('OnIN', value);
 
           if (event?.code === "Enter") {
             setSearchTerm(inputValue);
@@ -174,8 +176,8 @@ const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
           }
         }}
         onChange={(event: React.SyntheticEvent, newValue: string | null) => {
-        //   console.log(4, event);
-        //   console.log("newValue", newValue);
+          //   console.log(4, event);
+          //   console.log("newValue", newValue);
 
           if (newValue) {
             setSearchTerm(newValue);

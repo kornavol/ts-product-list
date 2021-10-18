@@ -9,7 +9,6 @@ import Gallerie from './components/ImgGallerie'
 function App() {
   return (
     <>
-    <h2>Crealytics chalange</h2>
       <Switch>
         <Route exact path="/" component={ProductList} />
         <Route exact path="/item/:id" children={<Gallerie />} />

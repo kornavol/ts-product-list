@@ -29,13 +29,7 @@ const ProductList: FC = () => {
     csvConverter("products").then((data: DSVRowArray<string>) =>
       setitems(data)
     );
-
-    console.log(0, location);
-
     let sessionFilterParam: any = location.state;
-
-    console.log(1, location.state);
-    console.log(11, sessionFilterParam);
 
     /* Detect click on back button */
     window.onpopstate = (e: any) => {
@@ -78,13 +72,15 @@ const ProductList: FC = () => {
     sessionStorage.setItem("filter", JSON.stringify(filter));
   }, [filter]);
 
-  let list: any[] = items.filter((item: any) => {
-    if (searchTerm === "") {
-      return item;
-    } else if (item.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-      return item;
-    }
-  });
+  let list: any[] = items
+    .filter((item: any) => {
+      if (searchTerm === "") {
+        return item;
+      } else if (item.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+        return item;
+      }
+    })
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   if (filter.gender !== "") {
     list = list.filter((item: any) => {
@@ -108,7 +104,7 @@ const ProductList: FC = () => {
   const currList = pagePaginator(limit, activePage, list);
   return (
     <Box
-      maxWidth={"1480px"}
+      // maxWidth={"1480px"}
       sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
     >
       <ProductBar
