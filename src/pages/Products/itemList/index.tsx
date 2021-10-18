@@ -1,21 +1,23 @@
 import React, { FC, useState } from "react";
 
-import { Grid } from "@mui/material";
 import { motion } from "framer-motion";
-import { ItemsListStyles, ItemStyles } from "./style";
+import { Grid } from "@mui/material";
+import { ItemStyles } from "./style";
 import noPicture from "../../../assets/pictures/no-img-layout.png";
 
 import { useHistory } from "react-router-dom";
 
 const Item: FC<any> = ({ item }) => {
+  const classes = ItemStyles();
+
   const history = useHistory();
 
-  const classes = ItemStyles();
   const [image, setImage] = useState<string>(item.image_link);
+
   const ImgClickHandler = () => {
-    if (item.additional_image_link &&  item.additional_image_link.length > 0 ) {
+    if (item.additional_image_link && item.additional_image_link.length > 0) {
       console.log(item.additional_image_link.length);
-      
+
       history.push(`/item/${item.gtin}`, item.additional_image_link);
     }
   };
@@ -28,17 +30,26 @@ const Item: FC<any> = ({ item }) => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <p>{item.title}</p>
+        <div className={classes.title}>{item.title}</div>
         <img
           src={image}
-          alt="image"
+          alt="product-image"
           className={classes.img}
           onError={() => setImage(noPicture)}
           onClick={ImgClickHandler}
           loading="lazy"
         />
-        <p>{`Price: ${item.price}`}</p>
-        <p>{`Price2: ${item.sale_price}`}</p>
+        <div className={classes.price}>
+          <div>{item.price}</div>
+          {item.sale_price < item.price ? (
+            <div className={classes.sale}>
+              <div style={{ marginRight: "5px", fontWeight: "bold" }}>
+                SALE:
+              </div>
+              <span>{item.sale_price}</span>
+            </div>
+          ) : null}
+        </div>
       </motion.div>
     </Grid>
   );
@@ -48,15 +59,18 @@ interface IProps {
   items: any[];
 }
 
-const ItemList: FC<any> = ({items}) => {
-  const classes = ItemsListStyles();
-  const list: JSX.Element[] = items.map((item: any) => (
+const ItemList: FC<IProps> = ({ items }) => {
+  interface Item {
+    [key: string]: string;
+  }
+
+  const list: JSX.Element[] = items.map((item: Item) => (
     <Item key={item.gtin} item={item} />
   ));
 
   return (
     <Grid container spacing={1}>
-      {items.length > 0 ? list : <p>test1</p>}
+      {items.length > 0 ? list : null}
     </Grid>
   );
 };

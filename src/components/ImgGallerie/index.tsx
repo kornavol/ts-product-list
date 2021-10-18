@@ -1,41 +1,39 @@
-import { AnySrvRecord } from "dns";
-import React, { FC, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router";
 import { GallerieStyles } from "./style";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import { Grid } from "@mui/material";
 
-import { ProductFilter } from "../../interfaces";
+import { FilterParam, ProductFilter } from "../../interfaces";
 
-// import noPicture from "../../assets/pictures/no-img-layout.png";
-
-const ImgGallerie: FC<any> = () => {
+const ImgGallerie: FC = () => {
   const classes = GallerieStyles();
   const history = useHistory();
   const location: any = useLocation();
+
+  const [isLinkFailed, setIsLinkFailed] = useState<boolean>(false);
+
   const imagesArr: string[] = location.state.split(",");
 
   const images: JSX.Element[] = imagesArr.map((img: string) => (
     <Grid item xs={12} lg={6}>
-      <img
-        className={classes.img}
-        src={img}
-        alt="additinal product picture"
-        key={img}
-        loading="lazy"
-      />
+      {isLinkFailed ? null : (
+        <img
+          src={img}
+          className={classes.img}
+          alt="additional picture of product"
+          key={img}
+          loading="lazy"
+          onError={() => setIsLinkFailed(true)}
+        />
+      )}
     </Grid>
   ));
 
-  interface FilterParam {
-    searchTerm: string;
-    filter: any;
-  }
-
   const filterParam: FilterParam = {
     searchTerm: "",
-    filter: {},
+    filter: { gender: "", onSale: false },
   };
 
   useEffect(() => {

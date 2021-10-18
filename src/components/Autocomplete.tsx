@@ -1,14 +1,17 @@
 import React, { FC, useState } from "react";
-import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
 
-import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import ListSubheader from "@mui/material/ListSubheader";
-import Popper from "@mui/material/Popper";
-import { useTheme, styled } from "@mui/material/styles";
-import { VariableSizeList, ListChildComponentProps } from "react-window";
+import {
+  TextField,
+  Stack,
+  useMediaQuery,
+  ListSubheader,
+  Popper,
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
+import { useTheme, styled } from "@mui/material/styles";
+import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
+
+import { VariableSizeList, ListChildComponentProps } from "react-window";
 
 import { toArrwithUniqItems } from "../utilities/converters";
 
@@ -18,7 +21,7 @@ interface IProps {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const LISTBOX_PADDING = 8; // px
+const LISTBOX_PADDING = 8;
 
 function renderRow(props: ListChildComponentProps) {
   const { data, index, style } = props;
@@ -134,7 +137,7 @@ const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
 
   //   console.log("searchTerm: ", searchTerm);
   //   console.log("inputValue: ", inputValue);
-  function groupBy(option: string):string {
+  function groupBy(option: string): string {
     // console.log("option", option);
     const firstLetter: string = option[0].toUpperCase();
     const num = /[0-9]/.test(firstLetter);
@@ -149,7 +152,7 @@ const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
   const products: any = toArrwithUniqItems(data);
 
   return (
-    <Stack spacing={2} sx={{ width: 300, }}>
+    <Stack spacing={2} sx={{ width: 300 }}>
       <Autocomplete
         freeSolo
         id="Autocomplete-search"

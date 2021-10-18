@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router";
 import { Box } from "@mui/material";
 
 import ItemList from "./itemList";
-import Pagination from "../../components/Pagination"; // change a name to Pagination
+import Pagination from "../../components/Pagination";
 import ProductBar from "../Products/ProductBar";
 
 import { DSVRowArray } from "d3-dsv";
@@ -15,7 +15,7 @@ import { ProductFilter } from "../../interfaces";
 
 const ProductList: FC = () => {
   const history = useHistory();
-  const location: any = useLocation();
+  const location = useLocation();
 
   const [items, setitems] = useState<any[]>([]);
   const [activePage, setActivePage] = useState<number>(1);
@@ -32,7 +32,7 @@ const ProductList: FC = () => {
     let sessionFilterParam: any = location.state;
 
     /* Detect click on back button */
-    window.onpopstate = (e: any) => {
+    window.onpopstate = () => {
       const sessionSearchTerm: string | null =
         sessionStorage.getItem("searchTerm");
       if (sessionSearchTerm) {
@@ -60,7 +60,8 @@ const ProductList: FC = () => {
 
       history.replace("/", "");
     }
-  }, []);
+    
+  }, [history, location.state]); // not sure about whis dependency
 
   useEffect(() => {
     if (searchTerm) {

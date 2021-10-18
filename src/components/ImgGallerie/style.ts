@@ -3,25 +3,24 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 export const GallerieStyles = makeStyles((theme: Theme) => ({
   root: {
     display: "flex",
-    flexDirection:'column',
+    flexDirection: "column",
     alignItems: "center",
     margin: "1vw",
   },
-  grid:{
-    width:'1562px',
-    justifyContent: 'flex-start',
+  grid: {
+    width: "1562px",
+    justifyContent: "flex-start",
   },
-  img:{
+  img: {
     boxSizing: "border-box",
-    width:'100%',
+    width: "100%",
   },
-  close:{
-    position:'fixed',
-    right:'15px',
-    opacity:0.5,
+  close: {
+    position: "fixed",
+    right: "15px",
+    opacity: 0.5,
     "&:hover": {
-      opacity:1,
+      opacity: 1,
     },
-    
-  }
+  },
 }));
