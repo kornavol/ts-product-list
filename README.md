@@ -9,6 +9,8 @@ In order not to complicate the architecture, I used session storage instead of s
 
 ### Features
 
+- filtering by search value (for confirmation needs press enter (submit action));
+- autocomplete;
 - responsive;
 - full works on desktop and mobile devices(events, etc.);
 - images validation;

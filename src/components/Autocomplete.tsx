@@ -170,7 +170,7 @@ const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
           renderGroup={(params) => params}
           value={searchTerm}
           inputValue={inputValue}
-          onInputChange={(event: any, value: string) => {
+          onInputChange={(event, value: string) => {
             setInputValue(value);
           }}
           onChange={(

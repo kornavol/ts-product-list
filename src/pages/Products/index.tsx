@@ -117,7 +117,7 @@ const ProductList: FC = () => {
       {/* {searchTerm && ( */}
       <>
         <ItemList items={currList} />
-        {totalPages >= 1 && (
+        {totalPages > 1 && (
           <Pagination
             totalPages={totalPages}
             activePage={activePage}
