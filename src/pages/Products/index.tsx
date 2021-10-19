@@ -20,7 +20,6 @@ const ProductList: FC = () => {
   const [items, setitems] = useState<any[]>([]);
   const [activePage, setActivePage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [showList, setshowList] = useState<boolean>(false);
   const [filter, setFilter] = React.useState<ProductFilter>({
     gender: "",
     onSale: false,
@@ -61,7 +60,7 @@ const ProductList: FC = () => {
 
       history.replace("/", "");
     }
-  }, [history, location.state]); // not sure about whis dependency
+  }, [history, location.state]); 
 
   useEffect(() => {
     if (searchTerm) {
@@ -105,7 +104,6 @@ const ProductList: FC = () => {
   const currList = pagePaginator(limit, activePage, list);
   return (
     <Box
-      // maxWidth={"1480px"}
       sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
     >
       <ProductBar
@@ -115,6 +113,7 @@ const ProductList: FC = () => {
         filter={filter}
         setFilter={setFilter}
       />
+      {/* If this check is enabled. The list will be rendered only is Search field contains a value */}
       {/* {searchTerm && ( */}
         <>
           <ItemList items={currList} />
