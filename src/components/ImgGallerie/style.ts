@@ -8,7 +8,7 @@ export const GallerieStyles = makeStyles((theme: Theme) => ({
     margin: "1vw",
   },
   grid: {
-    width: "1562px",
+    // width: "1562px",
     justifyContent: "flex-start",
   },
   img: {
