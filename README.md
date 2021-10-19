@@ -4,6 +4,9 @@
 
 Page: <https://kornavol.github.io/ts-product-list>
 
+### Notes
+In order not to complicate the architecture, I used session storage instead of state manager (redux)
+
 ### Features
 
 - responsive;

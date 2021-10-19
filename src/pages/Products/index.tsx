@@ -20,7 +20,7 @@ const ProductList: FC = () => {
   const [items, setitems] = useState<any[]>([]);
   const [activePage, setActivePage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [filter, setFilter] = React.useState<ProductFilter>({
+  const [filter, setFilter] = useState<ProductFilter>({
     gender: "",
     onSale: false,
   });
