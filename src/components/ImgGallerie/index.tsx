@@ -17,13 +17,12 @@ const ImgGallerie: FC = () => {
   const imagesArr: string[] = location.state.split(",");
 
   const images: JSX.Element[] = imagesArr.map((img: string) => (
-    <Grid item xs={12} lg={6}>
+    <Grid key={img} item xs={12} lg={6}>
       {isLinkFailed ? null : (
         <img
           src={img}
           className={classes.img}
           alt="additional picture of product"
-          key={img}
           loading="lazy"
           onError={() => setIsLinkFailed(true)}
         />

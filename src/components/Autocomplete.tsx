@@ -145,41 +145,51 @@ const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
     }
   }
 
-  /* remove doplicates and conver to array of strings */
+  /* remove duplicates and convert to array of strings */
   const products: any = toArrwithUniqItems(data);
 
   return (
     <Stack spacing={2} sx={{ width: 300 }}>
-      <Autocomplete
-        freeSolo
-        id="Autocomplete-search"
-        sx={{ width: 300 }}
-        disableListWrap
-        PopperComponent={StyledPopper}
-        ListboxComponent={ListboxComponent}
-        // options={optionConf(data)}
-        options={products.sort()}
-        groupBy={(option: string) => groupBy(option)}
-        renderInput={(params) => <TextField {...params} label="Search..." />}
-        renderOption={(props, option) => [props, option]}
-        renderGroup={(params) => params}
-        value={searchTerm}
-        inputValue={inputValue}
-        onInputChange={(event: any, value: string) => {
-          if (event?.code === "Enter") {
-            setSearchTerm(inputValue);
-          } else {
+      <form
+        onSubmit={(e: React.SyntheticEvent) => {
+          e.preventDefault();
+          setSearchTerm(inputValue);
+        }}
+      >
+        <Autocomplete
+          freeSolo
+          id="Autocomplete-search"
+          sx={{ width: 300 }}
+          disableListWrap
+          PopperComponent={StyledPopper}
+          ListboxComponent={ListboxComponent}
+          options={products.sort()}
+          groupBy={(option: string) => groupBy(option)}
+          renderInput={(params) => <TextField {...params} label="Search..." />}
+          renderOption={(props, option) => [props, option]}
+          renderGroup={(params) => params}
+          value={searchTerm}
+          inputValue={inputValue}
+          onInputChange={(event: any, value: string) => {
             setInputValue(value);
-          }
-        }}
-        onChange={(event: React.SyntheticEvent, newValue: string | null) => {
-          if (newValue) {
-            setSearchTerm(newValue);
-          } else {
-            setSearchTerm(inputValue);
-          }
-        }}
-      />
+          }}
+          onChange={(
+            event: React.SyntheticEvent,
+            newValue: string | null
+          ): void => {
+            if (newValue) {
+              setSearchTerm(newValue);
+            } else {
+              setSearchTerm(inputValue);
+            }
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              setSearchTerm(inputValue);
+            }
+          }}
+        />
+      </form>
     </Stack>
   );
 };

@@ -60,7 +60,7 @@ const ProductList: FC = () => {
 
       history.replace("/", "");
     }
-  }, [history, location.state]); 
+  }, [history, location.state]);
 
   useEffect(() => {
     if (searchTerm) {
@@ -107,7 +107,7 @@ const ProductList: FC = () => {
       sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
     >
       <ProductBar
-        data={list}
+        data={items}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         filter={filter}
@@ -115,16 +115,16 @@ const ProductList: FC = () => {
       />
       {/* If this check is enabled. The list will be rendered only is Search field contains a value */}
       {/* {searchTerm && ( */}
-        <>
-          <ItemList items={currList} />
-          {totalPages >= 1 && (
-            <Pagination
-              totalPages={totalPages}
-              activePage={activePage}
-              setActivePage={setActivePage}
-            />
-          )}
-        </>
+      <>
+        <ItemList items={currList} />
+        {totalPages >= 1 && (
+          <Pagination
+            totalPages={totalPages}
+            activePage={activePage}
+            setActivePage={setActivePage}
+          />
+        )}
+      </>
       {/* )} */}
     </Box>
   );
