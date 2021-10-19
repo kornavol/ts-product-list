@@ -2,7 +2,7 @@
 const CACHE = 'image-cache';
 const urlsToCache = [
     '/',
-    '/item/:id'
+    '/ts-product-list',
 ];
 
 // Install a service worker
