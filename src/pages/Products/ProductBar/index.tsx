@@ -47,7 +47,7 @@ const ProductBar: FC<IProps> = (props) => {
           setSearchTerm={setSearchTerm}
         />
       </div>
-      {searchTerm && (
+      {/* {searchTerm && ( */}
         <FormGroup row={true} className={classes.formGroup}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Gender</InputLabel>
@@ -81,7 +81,7 @@ const ProductBar: FC<IProps> = (props) => {
             }
           />
         </FormGroup>
-      )}
+      {/* )} */}
     </Stack>
   );
 };
