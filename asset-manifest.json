@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "./static/css/main.fd8663c6.chunk.css",
-    "main.js": "./static/js/main.c248cd41.chunk.js",
-    "main.js.map": "./static/js/main.c248cd41.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.b29e65f1.js",
-    "runtime-main.js.map": "./static/js/runtime-main.b29e65f1.js.map",
-    "static/js/2.dd46efd8.chunk.js": "./static/js/2.dd46efd8.chunk.js",
-    "static/js/2.dd46efd8.chunk.js.map": "./static/js/2.dd46efd8.chunk.js.map",
-    "index.html": "./index.html",
-    "service-worker.js": "./service-worker.js",
-    "service-worker.js.map": "./service-worker.js.map",
-    "static/css/main.fd8663c6.chunk.css.map": "./static/css/main.fd8663c6.chunk.css.map",
-    "static/js/2.dd46efd8.chunk.js.LICENSE.txt": "./static/js/2.dd46efd8.chunk.js.LICENSE.txt",
-    "static/media/no-img-layout.097c93a9.png": "./static/media/no-img-layout.097c93a9.png",
-    "static/media/products.c99fdf18.csv": "./static/media/products.c99fdf18.csv"
+    "main.css": "/ts-product-list/static/css/main.fd8663c6.chunk.css",
+    "main.js": "/ts-product-list/static/js/main.437c110e.chunk.js",
+    "main.js.map": "/ts-product-list/static/js/main.437c110e.chunk.js.map",
+    "runtime-main.js": "/ts-product-list/static/js/runtime-main.b12c881f.js",
+    "runtime-main.js.map": "/ts-product-list/static/js/runtime-main.b12c881f.js.map",
+    "static/js/2.dd46efd8.chunk.js": "/ts-product-list/static/js/2.dd46efd8.chunk.js",
+    "static/js/2.dd46efd8.chunk.js.map": "/ts-product-list/static/js/2.dd46efd8.chunk.js.map",
+    "index.html": "/ts-product-list/index.html",
+    "service-worker.js": "/ts-product-list/service-worker.js",
+    "service-worker.js.map": "/ts-product-list/service-worker.js.map",
+    "static/css/main.fd8663c6.chunk.css.map": "/ts-product-list/static/css/main.fd8663c6.chunk.css.map",
+    "static/js/2.dd46efd8.chunk.js.LICENSE.txt": "/ts-product-list/static/js/2.dd46efd8.chunk.js.LICENSE.txt",
+    "static/media/no-img-layout.097c93a9.png": "/ts-product-list/static/media/no-img-layout.097c93a9.png",
+    "static/media/products.c99fdf18.csv": "/ts-product-list/static/media/products.c99fdf18.csv"
   },
   "entrypoints": [
-    "static/js/runtime-main.b29e65f1.js",
+    "static/js/runtime-main.b12c881f.js",
     "static/js/2.dd46efd8.chunk.js",
     "static/css/main.fd8663c6.chunk.css",
-    "static/js/main.c248cd41.chunk.js"
+    "static/js/main.437c110e.chunk.js"
   ]
 }
