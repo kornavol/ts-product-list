@@ -55,9 +55,14 @@ const ProductBar: FC<IProps> = (props) => {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={filter.gender}
-              label="Age"
+              label="Gender"
               onChange={SelectHandleChange}
             >
+              {filter.gender !== "" && (
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+              )}
               <MenuItem value={"male"}>male</MenuItem>
               <MenuItem value={"female"}>female</MenuItem>
               <MenuItem value={"unisex"}>unisex</MenuItem>

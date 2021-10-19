@@ -20,6 +20,7 @@ const ProductList: FC = () => {
   const [items, setitems] = useState<any[]>([]);
   const [activePage, setActivePage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [showList, setshowList] = useState<boolean>(false);
   const [filter, setFilter] = React.useState<ProductFilter>({
     gender: "",
     onSale: false,
@@ -60,7 +61,6 @@ const ProductList: FC = () => {
 
       history.replace("/", "");
     }
-    
   }, [history, location.state]); // not sure about whis dependency
 
   useEffect(() => {
@@ -115,16 +115,18 @@ const ProductList: FC = () => {
         filter={filter}
         setFilter={setFilter}
       />
-      {searchTerm && (
+      {/* {searchTerm && ( */}
         <>
           <ItemList items={currList} />
-          <Pagination
-            totalPages={totalPages}
-            activePage={activePage}
-            setActivePage={setActivePage}
-          />
+          {totalPages >= 1 && (
+            <Pagination
+              totalPages={totalPages}
+              activePage={activePage}
+              setActivePage={setActivePage}
+            />
+          )}
         </>
-      )}
+      {/* )} */}
     </Box>
   );
 };

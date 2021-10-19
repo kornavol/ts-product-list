@@ -135,10 +135,7 @@ const StyledPopper = styled(Popper)({
 const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
   const [inputValue, setInputValue] = useState<string>("");
 
-  //   console.log("searchTerm: ", searchTerm);
-  //   console.log("inputValue: ", inputValue);
   function groupBy(option: string): string {
-    // console.log("option", option);
     const firstLetter: string = option[0].toUpperCase();
     const num = /[0-9]/.test(firstLetter);
     if (num) {
@@ -169,9 +166,6 @@ const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
         value={searchTerm}
         inputValue={inputValue}
         onInputChange={(event: any, value: string) => {
-          //   console.log(3, event.code);
-          //   console.log('OnIN', value);
-
           if (event?.code === "Enter") {
             setSearchTerm(inputValue);
           } else {
@@ -179,9 +173,6 @@ const BasicAutocomplete: FC<IProps> = ({ data, searchTerm, setSearchTerm }) => {
           }
         }}
         onChange={(event: React.SyntheticEvent, newValue: string | null) => {
-          //   console.log(4, event);
-          //   console.log("newValue", newValue);
-
           if (newValue) {
             setSearchTerm(newValue);
           } else {
