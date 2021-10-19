@@ -4,8 +4,6 @@
 
 Page: <https://kornavol.github.io/ts-product-list>
 
-A tenants form. Could be part of register app.
-
 ### Features
 
 - responsive;
